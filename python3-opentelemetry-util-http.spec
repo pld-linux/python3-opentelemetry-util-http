@@ -21,7 +21,7 @@ BuildRequires:	python3-installer
 BuildRequires:	python3-modules >= 1:3.9
 %if %{with tests}
 BuildRequires:	python3-opentelemetry-api = 1.40.0
-BuildRequires:	python3-opentelemetry-instrumentation = 1.40.0
+BuildRequires:	python3-opentelemetry-instrumentation = 0.61
 BuildRequires:	python3-opentelemetry-semantic-conventions = 0.61
 BuildRequires:	python3-wrapt >= 1
 %endif
@@ -29,19 +29,23 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 2.044
 # not specified in pyproject, but usedf in code
 Requires:	python3-opentelemetry-api = 1.40.0
-Requires:	python3-opentelemetry-instrumentation = 1.40.0
+Requires:	python3-opentelemetry-instrumentation = 0.61
 Requires:	python3-opentelemetry-semantic-conventions = 0.61
 Requires:	python3-wrapt >= 1
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-This library contains generated code for the util http
-defined by the OpenTelemetry specification.
+This library provides ASGI, WSGI middleware and other HTTP-related
+functionality that is common to instrumented web frameworks (such as
+Django, Starlette, FastAPI, etc.) to track requests timing through
+OpenTelemetry.
 
 %description -l pl.UTF-8
-Ta biblioteka zawiera wygenerowany kod dla konwencji semantycznych
-określonych przez specyfikację OpenTelemetry.
+Ta biblioteka dostarcza warstwę pośrednią (middleware) ASGI, WSGI oraz
+inną funkcjonalność dotyczącą protokołu HTTP, wspólną dla pomiarów
+szkieletów WWW (takich jak Django, Starlette, FastAPI itp.), aby
+śledzić czasy żądań poprzez OpenTelemetry.
 
 %prep
 %setup -q -n opentelemetry_util_http-%{version}%{subver}
